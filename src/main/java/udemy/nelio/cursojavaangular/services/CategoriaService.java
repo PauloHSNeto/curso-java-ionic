@@ -14,8 +14,6 @@ public class CategoriaService {
     private CategoriaRepository repo;
 
     public Categoria find(Integer id){
-        return repo.findById(id).get();
+        return repo.findById(id).orElse(null);
     }
-
-
 }

@@ -1,10 +1,10 @@
 package udemy.nelio.cursojavaangular.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Categoria implements Serializable {
     private static final long serialVerionId = 1L;
@@ -12,8 +12,9 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @ManyToMany(mappedBy = "categorias")
+    private List<Jogo> jogos = new ArrayList<>();
     public Categoria(){
-
     }
 
     public Categoria(Integer id, String name) {
@@ -37,6 +38,14 @@ public class Categoria implements Serializable {
         this.name = name;
     }
 
+    public List<Jogo> getJogos() {
+        return jogos;
+    }
+
+    public void setJogos(List<Jogo> jogos) {
+        this.jogos = jogos;
+    }
+
     @Override
     public String toString() {
         return "Categoria{" +
@@ -44,7 +53,6 @@ public class Categoria implements Serializable {
                 ", name='" + name + '\'' +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
