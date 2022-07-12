@@ -7,8 +7,8 @@ import java.io.Serializable;
 import java.util.*;
 @Entity
 public class Jogo  implements Serializable {
-    private static final long serialVerionId = 1L;
-    @Id
+        private static final long serialVerionId = 1L;
+        @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
