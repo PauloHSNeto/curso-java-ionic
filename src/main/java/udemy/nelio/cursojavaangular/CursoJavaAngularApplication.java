@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CursoJavaAngularApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CursoJavaAngularApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CursoJavaAngularApplication.class, args);
+    }
 
 }
