@@ -1,5 +1,7 @@
 package udemy.nelio.cursojavaangular.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -11,6 +13,7 @@ public class Jogo  implements Serializable {
     private Integer id;
     private String name;
     private Double price;
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name="Jogo_Categoria",
             joinColumns = @JoinColumn(name = "jogo_id"),

@@ -29,12 +29,22 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
         Categoria cat1 = new Categoria(null, "RPG");
         Categoria cat2 = new Categoria(null, "Strategy");
         Categoria cat3 = new Categoria(null, "Adventure");
-        repo.saveAll(Arrays.asList(cat1,cat2,cat3));
+        Categoria cat4 = new Categoria(null, "Shooter");
+        Categoria cat5 = new Categoria(null, "Online");
+        Categoria cat6 = new Categoria(null, "Horror");
+        Categoria cat7 = new Categoria(null, "Puzzle");
+        Categoria cat8 = new Categoria(null, "Sport");
+        Categoria cat9 = new Categoria(null, "Novel");
+
+        repo.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7,cat8,cat9));
 
 
         Jogo jogo1 = new Jogo(null,"Skyrim",60.00);
         Jogo jogo2 = new Jogo(null, "Starcraft", 50.00);
         Jogo jogo3 = new Jogo(null, "Mass Effect", 70.00);
+        Jogo jogo4 = new Jogo(null,"Fire Emblem",60.00);
+        Jogo jogo5 = new Jogo(null, "Zelda", 50.00);
+        Jogo jogo6 = new Jogo(null, "X-COM", 70.00);
 
         cat1.getJogos().addAll(Arrays.asList(jogo1,jogo3));
         cat2.getJogos().addAll(Arrays.asList(jogo2));
