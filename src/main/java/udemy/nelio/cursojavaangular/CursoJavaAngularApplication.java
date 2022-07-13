@@ -8,10 +8,7 @@ import udemy.nelio.cursojavaangular.domain.cliente.Cidade;
 import udemy.nelio.cursojavaangular.domain.cliente.Cliente;
 import udemy.nelio.cursojavaangular.domain.cliente.Endereco;
 import udemy.nelio.cursojavaangular.domain.cliente.Estado;
-import udemy.nelio.cursojavaangular.domain.pedido.Pagamento;
-import udemy.nelio.cursojavaangular.domain.pedido.PagamentoComBoleto;
-import udemy.nelio.cursojavaangular.domain.pedido.PagamentoComCartao;
-import udemy.nelio.cursojavaangular.domain.pedido.Pedido;
+import udemy.nelio.cursojavaangular.domain.pedido.*;
 import udemy.nelio.cursojavaangular.domain.produto.Categoria;
 import udemy.nelio.cursojavaangular.domain.produto.Jogo;
 import udemy.nelio.cursojavaangular.enums.EstadoPagamento;
@@ -41,6 +38,9 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
 
     @Autowired
     private PagamentoRepository pgtoRepo;
+
+    @Autowired
+    private ItemPedidoRepository ipRepo;
 
 
 
@@ -115,6 +115,18 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
         pedRepo.saveAll(Arrays.asList(ped1,ped2));
         pgtoRepo.saveAll(Arrays.asList(pgto1,pgto2));
 
+        ItemPedido ip1 = new ItemPedido(ped1,jogo1,0.00,1,60.00);
+        ItemPedido ip2 = new ItemPedido(ped1,jogo3,0.00,1,70.00);
+        ItemPedido ip3 = new ItemPedido(ped2,jogo2,100.00,1,50.00);
+
+        ped1.getItems().addAll(Arrays.asList(ip1,ip2));
+        ped2.getItems().addAll(Arrays.asList(ip3));
+
+        jogo1.getItems().addAll(Arrays.asList(ip1));
+        jogo2.getItems().addAll(Arrays.asList(ip3));
+        jogo3.getItems().addAll(Arrays.asList(ip2));
+
+        ipRepo.saveAll(Arrays.asList(ip1,ip2,ip3));
 
     }
 }

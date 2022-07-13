@@ -1,6 +1,8 @@
 package udemy.nelio.cursojavaangular.domain.produto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import udemy.nelio.cursojavaangular.domain.pedido.ItemPedido;
+import udemy.nelio.cursojavaangular.domain.pedido.Pedido;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +10,7 @@ import java.util.*;
 @Entity
 public class Jogo  implements Serializable {
         private static final long serialVerionId = 1L;
+
         @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,6 +23,8 @@ public class Jogo  implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
     private List<Categoria> categorias = new ArrayList<>();
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> items = new HashSet<>();
 
     public Jogo() {
     }
@@ -28,6 +33,22 @@ public class Jogo  implements Serializable {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public  List<Pedido> getPedidos(){
+        List<Pedido> lista = new ArrayList<>();
+        for (ItemPedido p : items){
+            lista.add(p.getPedido());
+        }
+        return lista;
+    }
+
+    public Set<ItemPedido> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<ItemPedido> items) {
+        this.items = items;
     }
 
     public Integer getId() {
