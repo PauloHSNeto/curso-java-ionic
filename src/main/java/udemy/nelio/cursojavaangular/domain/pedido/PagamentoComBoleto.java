@@ -1,5 +1,6 @@
 package udemy.nelio.cursojavaangular.domain.pedido;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import udemy.nelio.cursojavaangular.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
@@ -7,7 +8,9 @@ import java.util.Date;
 @Entity
 public class PagamentoComBoleto extends Pagamento{
     private static final long serialVerionId = 1L;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataDeVencimento;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataDePagamento;
 
     public PagamentoComBoleto() {

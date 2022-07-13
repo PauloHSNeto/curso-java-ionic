@@ -1,5 +1,7 @@
 package udemy.nelio.cursojavaangular.domain.pedido;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import udemy.nelio.cursojavaangular.domain.cliente.Cliente;
 import udemy.nelio.cursojavaangular.domain.cliente.Endereco;
 
@@ -15,10 +17,12 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date instente;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    private Date instante;
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
-
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -31,9 +35,9 @@ public class Pedido implements Serializable {
     public Pedido() {
     }
 
-    public Pedido(Integer id, Date instente, Cliente cliente, Endereco enderecoDeEntrega) {
+    public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
         this.id = id;
-        this.instente = instente;
+        this.instante = instante;
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
     }
@@ -46,12 +50,12 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public Date getInstente() {
-        return instente;
+    public Date getInstante() {
+        return instante;
     }
 
-    public void setInstente(Date instente) {
-        this.instente = instente;
+    public void setInstante(Date instante) {
+        this.instante = instante;
     }
 
     public Pagamento getPagamento() {

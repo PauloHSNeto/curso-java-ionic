@@ -1,5 +1,6 @@
 package udemy.nelio.cursojavaangular.domain.pedido;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import udemy.nelio.cursojavaangular.domain.produto.Jogo;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.io.Serializable;
 @Entity
 public class ItemPedido implements Serializable {
     private static final long serialVerionId = 1L;
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
@@ -25,14 +27,14 @@ public class ItemPedido implements Serializable {
         this.quantidade = quantidade;
         this.preco = preco;
     }
+    @JsonIgnore
     public Pedido getPedido(){
 
         return id.getPedido();
     }
+    @JsonIgnore
     public Jogo getProduto(){
-
         return id.getProduto();
-
     }
     public ItemPedidoPK getId() {
         return id;

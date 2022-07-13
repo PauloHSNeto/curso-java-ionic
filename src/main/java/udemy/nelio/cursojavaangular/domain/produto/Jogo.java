@@ -1,6 +1,7 @@
 package udemy.nelio.cursojavaangular.domain.produto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import udemy.nelio.cursojavaangular.domain.pedido.ItemPedido;
 import udemy.nelio.cursojavaangular.domain.pedido.Pedido;
 
@@ -23,6 +24,7 @@ public class Jogo  implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
     private List<Categoria> categorias = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> items = new HashSet<>();
 
@@ -34,7 +36,7 @@ public class Jogo  implements Serializable {
         this.name = name;
         this.price = price;
     }
-
+    @JsonIgnore
     public  List<Pedido> getPedidos(){
         List<Pedido> lista = new ArrayList<>();
         for (ItemPedido p : items){

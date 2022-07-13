@@ -1,5 +1,6 @@
 package udemy.nelio.cursojavaangular.domain.cliente;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import udemy.nelio.cursojavaangular.domain.pedido.Pedido;
 import udemy.nelio.cursojavaangular.enums.TipoCliente;
@@ -24,6 +25,7 @@ public class Cliente implements Serializable {
     @ElementCollection
     @CollectionTable(name = "TELEFONES")
     private Set<String> telefones = new HashSet<>();
+    @JsonBackReference
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 

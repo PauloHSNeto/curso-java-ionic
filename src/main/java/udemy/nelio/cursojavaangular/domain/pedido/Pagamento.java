@@ -1,5 +1,6 @@
 package udemy.nelio.cursojavaangular.domain.pedido;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import udemy.nelio.cursojavaangular.domain.cliente.Cliente;
 import udemy.nelio.cursojavaangular.domain.cliente.Endereco;
 import udemy.nelio.cursojavaangular.enums.EstadoPagamento;
@@ -13,6 +14,7 @@ public abstract class Pagamento implements Serializable {
     @Id
     private Integer id;
     private Integer estado;
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
