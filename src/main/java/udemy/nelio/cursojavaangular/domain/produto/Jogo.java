@@ -1,4 +1,4 @@
-package udemy.nelio.cursojavaangular.domain;
+package udemy.nelio.cursojavaangular.domain.produto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 

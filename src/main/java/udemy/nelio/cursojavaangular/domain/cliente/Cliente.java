@@ -1,6 +1,7 @@
-package udemy.nelio.cursojavaangular.domain;
+package udemy.nelio.cursojavaangular.domain.cliente;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import udemy.nelio.cursojavaangular.domain.pedido.Pedido;
 import udemy.nelio.cursojavaangular.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -23,6 +24,8 @@ public class Cliente implements Serializable {
     @ElementCollection
     @CollectionTable(name = "TELEFONES")
     private Set<String> telefones = new HashSet<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
     }
@@ -33,6 +36,18 @@ public class Cliente implements Serializable {
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo.getCod();
+    }
+
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     public Integer getId() {

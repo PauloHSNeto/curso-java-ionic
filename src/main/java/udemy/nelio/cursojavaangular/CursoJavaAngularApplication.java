@@ -4,13 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import udemy.nelio.cursojavaangular.domain.*;
+import udemy.nelio.cursojavaangular.domain.cliente.Cidade;
+import udemy.nelio.cursojavaangular.domain.cliente.Cliente;
+import udemy.nelio.cursojavaangular.domain.cliente.Endereco;
+import udemy.nelio.cursojavaangular.domain.cliente.Estado;
+import udemy.nelio.cursojavaangular.domain.pedido.Pagamento;
+import udemy.nelio.cursojavaangular.domain.pedido.PagamentoComBoleto;
+import udemy.nelio.cursojavaangular.domain.pedido.PagamentoComCartao;
+import udemy.nelio.cursojavaangular.domain.pedido.Pedido;
+import udemy.nelio.cursojavaangular.domain.produto.Categoria;
+import udemy.nelio.cursojavaangular.domain.produto.Jogo;
+import udemy.nelio.cursojavaangular.enums.EstadoPagamento;
 import udemy.nelio.cursojavaangular.enums.TipoCliente;
 import udemy.nelio.cursojavaangular.repository.*;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class CursoJavaAngularApplication implements CommandLineRunner {
@@ -26,6 +35,13 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
     private ClienteRepository cliRepo;
     @Autowired
     private EnderecoRepository endRepo;
+
+    @Autowired
+    private PedidoRepository pedRepo;
+
+    @Autowired
+    private PagamentoRepository pgtoRepo;
+
 
 
     public static void main(String[] args) {
@@ -83,11 +99,21 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
         cliRepo.saveAll(Arrays.asList(cli1));
         endRepo.saveAll(Arrays.asList(end1,end2));
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
+        Pedido ped1 = new Pedido(null, sdf.parse("21/03/1989 11:22"),cli1,end2);
+        Pedido ped2 = new Pedido(null,sdf.parse("13/07/2022 11:24"), cli1,end1);
 
+        Pagamento pgto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO,ped1,4);
+        ped1.setPagamento(pgto1);
 
+        Pagamento pgto2 = new PagamentoComBoleto(null,EstadoPagamento.PENDENTE,ped2,sdf.parse("20/10/2023 00:00"),null);
+        ped2.setPagamento(pgto2);
 
+        cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
 
+        pedRepo.saveAll(Arrays.asList(ped1,ped2));
+        pgtoRepo.saveAll(Arrays.asList(pgto1,pgto2));
 
 
     }
