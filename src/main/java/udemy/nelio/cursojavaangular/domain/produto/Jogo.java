@@ -17,7 +17,7 @@ public class Jogo  implements Serializable {
     private Integer id;
     private String name;
     private Double price;
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name="Jogo_Categoria",
             joinColumns = @JoinColumn(name = "jogo_id"),
