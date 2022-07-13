@@ -4,14 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import udemy.nelio.cursojavaangular.domain.Categoria;
-import udemy.nelio.cursojavaangular.domain.Cidade;
-import udemy.nelio.cursojavaangular.domain.Estado;
-import udemy.nelio.cursojavaangular.domain.Jogo;
-import udemy.nelio.cursojavaangular.repository.CategoriaRepository;
-import udemy.nelio.cursojavaangular.repository.CidadeRepository;
-import udemy.nelio.cursojavaangular.repository.EstadoRepository;
-import udemy.nelio.cursojavaangular.repository.JogoRepository;
+import udemy.nelio.cursojavaangular.domain.*;
+import udemy.nelio.cursojavaangular.enums.TipoCliente;
+import udemy.nelio.cursojavaangular.repository.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +22,10 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
     private CidadeRepository cidrepo;
     @Autowired
     private EstadoRepository estrepo;
+    @Autowired
+    private ClienteRepository cliRepo;
+    @Autowired
+    private EnderecoRepository endRepo;
 
 
     public static void main(String[] args) {
@@ -73,8 +72,16 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
         cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3));
 
 
+        Cliente cli1 = new Cliente(null, "Paulo Henrique","paulo@otmail.com","33333333333", TipoCliente.PESSOAFISICA);
+        cli1.getTelefones().addAll(Arrays.asList("12121212","34343434","45454545"));
 
+        Endereco end1 = new Endereco(null,"logarouro","111","apt 11 bloco 1", "bairro","cep",cli1, cid1 );
+        Endereco end2 = new Endereco(null,"logarouro2","1112","apt 112 bloco 12", "bairro2","cep2",cli1, cid2 );
 
+        cli1.getEnderecos().addAll(Arrays.asList(end1,end2));
+
+        cliRepo.saveAll(Arrays.asList(cli1));
+        endRepo.saveAll(Arrays.asList(end1,end2));
 
 
 
