@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import udemy.nelio.cursojavaangular.DTO.CategoriaDTO;
 import udemy.nelio.cursojavaangular.domain.produto.Categoria;
 import udemy.nelio.cursojavaangular.repository.CategoriaRepository;
 import udemy.nelio.cursojavaangular.resources.exception.DataIntegrityException;
@@ -53,5 +54,9 @@ public class CategoriaService {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction),
                 orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO dto){
+        return new Categoria((dto.getId()), dto.getName());
     }
 }

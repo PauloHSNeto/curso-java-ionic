@@ -11,6 +11,7 @@ import udemy.nelio.cursojavaangular.domain.produto.Categoria;
 import udemy.nelio.cursojavaangular.services.CategoriaService;
 
 import javax.servlet.Servlet;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,14 +28,16 @@ public class CategoriaResources {
          return ResponseEntity.ok(result);
          }
     @PostMapping
-    public ResponseEntity<Void> instert(@RequestBody Categoria obj){
+    public ResponseEntity<Void> instert(@Valid @RequestBody CategoriaDTO objDTO){
+        Categoria obj = serv.fromDTO(objDTO);
         obj = serv.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
 
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody Categoria obj,@PathVariable Integer id){
+    public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDTO,@PathVariable Integer id){
+        Categoria obj = serv.fromDTO(objDTO);
         obj.setId(id);
         serv.update(obj);
         return ResponseEntity.noContent().build();
