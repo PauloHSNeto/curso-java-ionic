@@ -20,4 +20,5 @@ public class PedidoResources {
          Pedido result = serv.find(id);
          return ResponseEntity.ok(result);
          }
+
 }
