@@ -8,6 +8,7 @@ import udemy.nelio.cursojavaangular.domain.produto.Categoria;
 import udemy.nelio.cursojavaangular.repository.CategoriaRepository;
 import udemy.nelio.cursojavaangular.resources.exception.DataIntegrityException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +41,8 @@ public class CategoriaService {
             throw new DataIntegrityException("Nao e possivel excluir uma categoria que possui produtos");
 
         }
+    }
+    public List<Categoria> findAll(){
+        return repo.findAll();
     }
 }
