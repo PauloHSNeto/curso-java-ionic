@@ -3,6 +3,9 @@ package udemy.nelio.cursojavaangular.services;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import udemy.nelio.cursojavaangular.domain.produto.Categoria;
 import udemy.nelio.cursojavaangular.repository.CategoriaRepository;
@@ -44,5 +47,11 @@ public class CategoriaService {
     }
     public List<Categoria> findAll(){
         return repo.findAll();
+    }
+
+    public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction),
+                orderBy);
+        return repo.findAll(pageRequest);
     }
 }
