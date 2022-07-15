@@ -1,7 +1,5 @@
 package udemy.nelio.cursojavaangular.domain.cliente;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 

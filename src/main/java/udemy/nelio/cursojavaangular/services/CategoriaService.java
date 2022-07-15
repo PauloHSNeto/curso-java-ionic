@@ -32,11 +32,6 @@ public class CategoriaService {
         obj.setId(null);
         return repo.save(obj);
     }
-
-    public Categoria update(Categoria obj) {
-        return repo.save(obj);
-    }
-
     public void delete(Integer id) {
         find(id);
         try {
@@ -54,6 +49,15 @@ public class CategoriaService {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction),
                 orderBy);
         return repo.findAll(pageRequest);
+    }
+    public Categoria update(Categoria obj) {
+        Categoria newObj = find(obj.getId());
+        updateData(newObj,obj);
+        return repo.save(newObj);
+    }
+
+    private void updateData(Categoria newObj, Categoria obj) {
+        newObj.setName(obj.getName());
     }
 
     public Categoria fromDTO(CategoriaDTO dto){
