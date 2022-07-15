@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import udemy.nelio.cursojavaangular.DTO.ClienteDTO;
+import udemy.nelio.cursojavaangular.DTO.ClienteNewDTO;
 import udemy.nelio.cursojavaangular.domain.cliente.Cliente;
 import udemy.nelio.cursojavaangular.services.ClienteService;
 
@@ -55,4 +56,12 @@ public class ClienteResources {
         Page<ClienteDTO> listDTO = list.map(obj-> new ClienteDTO(obj));
         return ResponseEntity.ok().body(listDTO);
     }
+    @PostMapping
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){
+        Cliente obj = serv.fromDTO(objDTO);
+        serv.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
 }
