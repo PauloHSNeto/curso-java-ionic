@@ -2,11 +2,12 @@ package udemy.nelio.cursojavaangular.DTO;
 
 import org.hibernate.validator.constraints.Length;
 import udemy.nelio.cursojavaangular.domain.cliente.Cliente;
+import udemy.nelio.cursojavaangular.services.Validation.ClienteUpdate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
     private static final long serialVerionId = 1L;
     private Integer id;
