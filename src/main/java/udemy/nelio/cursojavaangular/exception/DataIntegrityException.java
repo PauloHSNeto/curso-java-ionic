@@ -1,4 +1,4 @@
-package udemy.nelio.cursojavaangular.resources.exception;
+package udemy.nelio.cursojavaangular.exception;
 
 public class DataIntegrityException extends RuntimeException{
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import udemy.nelio.cursojavaangular.DTO.CategoriaDTO;
 import udemy.nelio.cursojavaangular.domain.produto.Categoria;
 import udemy.nelio.cursojavaangular.repository.CategoriaRepository;
-import udemy.nelio.cursojavaangular.resources.exception.DataIntegrityException;
+import udemy.nelio.cursojavaangular.exception.DataIntegrityException;
 
 import java.util.List;
 import java.util.Optional;
