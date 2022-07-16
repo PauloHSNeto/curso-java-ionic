@@ -131,8 +131,8 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
         pgtoRepo.saveAll(Arrays.asList(pgto1,pgto2));
 
         ItemPedido ip1 = new ItemPedido(ped1,jogo1,0.00,1,60.00);
-        ItemPedido ip2 = new ItemPedido(ped1,jogo3,0.00,1,70.00);
-        ItemPedido ip3 = new ItemPedido(ped2,jogo2,100.00,1,50.00);
+        ItemPedido ip2 = new ItemPedido(ped1,jogo3,0.00,2,70.00);
+        ItemPedido ip3 = new ItemPedido(ped2,jogo2,100.00,3,50.00);
 
         ped1.getItems().addAll(Arrays.asList(ip1,ip2));
         ped2.getItems().addAll(Arrays.asList(ip3));
