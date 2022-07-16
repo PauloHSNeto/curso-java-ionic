@@ -57,29 +57,44 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
         Categoria cat5 = new Categoria(null, "Online");
         Categoria cat6 = new Categoria(null, "Horror");
         Categoria cat7 = new Categoria(null, "Puzzle");
-        Categoria cat8 = new Categoria(null, "Sport");
-        Categoria cat9 = new Categoria(null, "Novel");
-
-        catrepo.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7,cat8,cat9));
-
         Jogo jogo1 = new Jogo(null,"Skyrim",60.00);
         Jogo jogo2 = new Jogo(null, "Starcraft", 50.00);
         Jogo jogo3 = new Jogo(null, "Mass Effect", 70.00);
         Jogo jogo4 = new Jogo(null,"Fire Emblem",60.00);
         Jogo jogo5 = new Jogo(null, "Zelda", 50.00);
         Jogo jogo6 = new Jogo(null, "X-COM", 70.00);
+        Jogo jogo7 = new Jogo(null,"Splatoon",60.00);
+        Jogo jogo8 = new Jogo(null, "Left 4 Dead", 50.00);
+        Jogo jogo9 = new Jogo(null, "Silent Hill", 70.00);
+        Jogo jogo10 = new Jogo(null,"Candy Crush",60.00);
+        Jogo jogo11= new Jogo(null, "DOOM", 50.00);
+        Jogo jogo12 = new Jogo(null, "World of Warcraft", 70.00);
 
-        cat1.getJogos().addAll(Arrays.asList(jogo1,jogo3));
-        cat2.getJogos().addAll(Arrays.asList(jogo2));
-        jogo1.getCategorias().add(cat1);
-        jogo2.getCategorias().add(cat2);
-        jogo3.getCategorias().addAll(Arrays.asList(cat1,cat3));
+        cat1.getJogos().addAll(Arrays.asList(jogo1,jogo3,jogo4,jogo12));
+        cat2.getJogos().addAll(Arrays.asList(jogo2,jogo4,jogo6));
+        cat3.getJogos().addAll(Arrays.asList(jogo1,jogo5));
+        cat4.getJogos().addAll(Arrays.asList(jogo3,jogo6,jogo7,jogo8,jogo11));
+        cat5.getJogos().addAll(Arrays.asList(jogo2,jogo7,jogo8,jogo12));
+        cat6.getJogos().addAll(Arrays.asList(jogo8,jogo9));
+        cat7.getJogos().addAll(Arrays.asList(jogo11));
+        jogo1.getCategorias().addAll(Arrays.asList(cat1,cat3));
+        jogo2.getCategorias().addAll(Arrays.asList(cat2,cat5));
+        jogo3.getCategorias().addAll(Arrays.asList(cat1,cat4));
+        jogo4.getCategorias().addAll(Arrays.asList(cat1,cat2));
+        jogo5.getCategorias().addAll(Arrays.asList(cat3));
+        jogo6.getCategorias().addAll(Arrays.asList(cat2,cat4));
+        jogo7.getCategorias().addAll(Arrays.asList(cat4,cat5));
+        jogo8.getCategorias().addAll(Arrays.asList(cat4,cat5,cat6));
+        jogo9.getCategorias().addAll(Arrays.asList(cat1,cat3));
+        jogo10.getCategorias().addAll(Arrays.asList(cat6));
+        jogo11.getCategorias().addAll(Arrays.asList(cat7));
+        jogo12.getCategorias().addAll(Arrays.asList(cat1,cat5));
 
-        jogoRepo.saveAll(Arrays.asList(jogo1,jogo2,jogo3));
+        catrepo.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
+        jogoRepo.saveAll(Arrays.asList(jogo1,jogo2,jogo3,jogo4,jogo5,jogo6,jogo7,jogo8,jogo9,jogo10,jogo11,jogo12));
 
         Estado est1 = new Estado(null,"Rio de Janeiro");
         Estado est2 = new Estado(null,"Sao Paulo");
-
         Cidade cid1 = new Cidade(null, "Osasco",est1);
         Cidade cid2 = new Cidade(null, "Niteroi",est2);
         Cidade cid3 = new Cidade (null,"Curitiba",est1);
