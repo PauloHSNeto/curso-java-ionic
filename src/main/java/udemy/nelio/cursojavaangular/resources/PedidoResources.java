@@ -2,12 +2,13 @@ package udemy.nelio.cursojavaangular.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import udemy.nelio.cursojavaangular.domain.pedido.Pedido;
 import udemy.nelio.cursojavaangular.services.PedidoService;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/pedidos")
@@ -21,4 +22,11 @@ public class PedidoResources {
          return ResponseEntity.ok(result);
          }
 
+    @RequestMapping(method= RequestMethod.POST)
+    public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
+        obj = serv.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
 }

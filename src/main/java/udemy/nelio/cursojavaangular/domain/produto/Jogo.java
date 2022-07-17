@@ -30,7 +30,6 @@ public class Jogo  implements Serializable {
 
     public Jogo() {
     }
-
     public Jogo(Integer id, String name, Double price) {
         this.id = id;
         this.name = name;

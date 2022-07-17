@@ -1,40 +1,46 @@
 package udemy.nelio.cursojavaangular.domain.pedido;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import udemy.nelio.cursojavaangular.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
 import java.util.Date;
+
 @Entity
-public class PagamentoComBoleto extends Pagamento{
-    private static final long serialVerionId = 1L;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date dataDeVencimento;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date dataDePagamento;
+@JsonTypeName("pagamentoComBoleto")
+public class PagamentoComBoleto extends Pagamento {
+    private static final long serialVersionUID = 1L;
+
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private Date dataVencimento;
+
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private Date dataPagamento;
 
     public PagamentoComBoleto() {
     }
 
-    public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataDeVencimento, Date dataDePagamento) {
+    public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
         super(id, estado, pedido);
-        this.dataDeVencimento = dataDeVencimento;
-        this.dataDePagamento = dataDePagamento;
+        this.dataPagamento = dataPagamento;
+        this.dataVencimento = dataVencimento;
     }
 
-    public Date getDataDeVencimento() {
-        return dataDeVencimento;
+    public Date getDataVencimento() {
+        return dataVencimento;
     }
 
-    public void setDataDeVencimento(Date dataDeVencimento) {
-        this.dataDeVencimento = dataDeVencimento;
+    public void setDataVencimento(Date dataVencimento) {
+        this.dataVencimento = dataVencimento;
     }
 
-    public Date getDataDePagamento() {
-        return dataDePagamento;
+    public Date getDataPagamento() {
+        return dataPagamento;
     }
 
-    public void setDataDePagamento(Date dataDePagamento) {
-        this.dataDePagamento = dataDePagamento;
+    public void setDataPagamento(Date dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
+
 }

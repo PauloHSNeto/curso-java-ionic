@@ -86,4 +86,8 @@ public class ItemPedido implements Serializable {
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
     }
+
+    public void setPedido(Pedido pedido) {
+        id.setPedido(pedido);
+    }
 }
