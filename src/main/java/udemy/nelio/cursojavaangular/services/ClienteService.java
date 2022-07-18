@@ -1,6 +1,6 @@
 package udemy.nelio.cursojavaangular.services;
 
-import org.hibernate.ObjectNotFoundException;
+import udemy.nelio.cursojavaangular.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -37,7 +37,7 @@ public class ClienteService {
     public Cliente find(Integer id){
         Optional<Cliente> obj = repo.findById(id);
 
-        return obj.orElseThrow(()-> new ObjectNotFoundException(null,
+        return obj.orElseThrow(()-> new ObjectNotFoundException(
                 "Objeto nao encontrado! Id "+ id+ ",tipo :"+ Cliente.class.getName()));
     }
     public Cliente update(Cliente obj) {

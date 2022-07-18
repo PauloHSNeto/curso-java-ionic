@@ -1,6 +1,6 @@
 package udemy.nelio.cursojavaangular.services;
 
-import org.hibernate.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import udemy.nelio.cursojavaangular.domain.produto.Categoria;
 import udemy.nelio.cursojavaangular.domain.produto.Jogo;
+import udemy.nelio.cursojavaangular.exception.ObjectNotFoundException;
 import udemy.nelio.cursojavaangular.repository.CategoriaRepository;
 import udemy.nelio.cursojavaangular.repository.JogoRepository;
 
@@ -25,7 +26,7 @@ public class JogoService {
     public Jogo find(Integer id){
         Optional<Jogo> obj = repo.findById(id);
 
-        return obj.orElseThrow(()-> new ObjectNotFoundException(null,
+        return obj.orElseThrow(()-> new ObjectNotFoundException(
                 "Objeto nao encontrado! Id "+ id+ ",tipo :"+ Jogo.class.getName()));
     }
 

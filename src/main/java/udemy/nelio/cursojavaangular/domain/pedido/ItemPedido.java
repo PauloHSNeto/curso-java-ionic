@@ -20,9 +20,10 @@ public class ItemPedido implements Serializable {
     public ItemPedido() {
     }
 
-    public ItemPedido(Pedido pedido , Jogo jogo, Double desconto, Integer quantidade, Double preco) {
+    public ItemPedido(Pedido pedido, Jogo produto, Double desconto, Integer quantidade, Double preco) {
+        super();
         id.setPedido(pedido);
-        id.setProduto(jogo);
+        id.setProduto(produto);
         this.desconto = desconto;
         this.quantidade = quantidade;
         this.preco = preco;
@@ -36,7 +37,11 @@ public class ItemPedido implements Serializable {
 
         return id.getPedido();
     }
-    @JsonIgnore
+
+    public void setProduto(Jogo produto) {
+        id.setProduto(produto);
+    }
+
     public Jogo getProduto(){
         return id.getProduto();
     }
@@ -47,46 +52,48 @@ public class ItemPedido implements Serializable {
     public void setId(ItemPedidoPK id) {
         this.id = id;
     }
-
     public Double getDesconto() {
         return desconto;
     }
-
     public void setDesconto(Double desconto) {
         this.desconto = desconto;
     }
-
     public Integer getQuantidade() {
         return quantidade;
     }
-
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
-
     public Double getPreco() {
         return preco;
     }
-
     public void setPreco(Double preco) {
         this.preco = preco;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ItemPedido)) return false;
-
-        ItemPedido that = (ItemPedido) o;
-
-        return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
-    }
-
-    @Override
     public int hashCode() {
-        return getId() != null ? getId().hashCode() : 0;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ItemPedido other = (ItemPedido) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
     public void setPedido(Pedido pedido) {
         id.setPedido(pedido);
     }
