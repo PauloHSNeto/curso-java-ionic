@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import udemy.nelio.cursojavaangular.services.DBService;
+import udemy.nelio.cursojavaangular.services.EmailService;
 
 import java.text.ParseException;
 
