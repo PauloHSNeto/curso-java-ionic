@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import udemy.nelio.cursojavaangular.services.DBService;
 import udemy.nelio.cursojavaangular.services.EmailService;
+import udemy.nelio.cursojavaangular.services.MockEmailService;
+import udemy.nelio.cursojavaangular.services.SMTPEMailService;
 
 import java.text.ParseException;
 
@@ -20,10 +22,12 @@ public class DevConfig {
 
     @Bean
     public boolean instantiateDatabase() throws ParseException {
-        if (!strategy.equals("create")) {
-            return false;
-        }
-            dbService.instantiateTestDatabase();
+        dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SMTPEMailService();
     }
 }

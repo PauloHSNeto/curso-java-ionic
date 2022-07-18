@@ -92,7 +92,7 @@ public class DBService {
         cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3));
 
 
-        Cliente cli1 = new Cliente(null, "Paulo Henrique","paulo@otmail.com","33333333333", TipoCliente.PESSOAFISICA);
+        Cliente cli1 = new Cliente(null, "Paulo Henrique","alphabottom2011@gmail.com","33333333333", TipoCliente.PESSOAFISICA);
         cli1.getTelefones().addAll(Arrays.asList("12121212","34343434","45454545"));
 
         Endereco end1 = new Endereco(null,"logarouro","111","apt 11 bloco 1", "bairro","cep",cli1, cid1 );
