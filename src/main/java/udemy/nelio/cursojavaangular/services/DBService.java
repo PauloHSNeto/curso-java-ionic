@@ -11,6 +11,7 @@ import udemy.nelio.cursojavaangular.domain.pedido.*;
 import udemy.nelio.cursojavaangular.domain.produto.Categoria;
 import udemy.nelio.cursojavaangular.domain.produto.Jogo;
 import udemy.nelio.cursojavaangular.enums.EstadoPagamento;
+import udemy.nelio.cursojavaangular.enums.Perfil;
 import udemy.nelio.cursojavaangular.enums.TipoCliente;
 import udemy.nelio.cursojavaangular.repository.*;
 
@@ -96,20 +97,25 @@ public class DBService {
         cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3));
 
 
-        Cliente cli1 = new Cliente(null, "Paulo Henrique","alphabottom2011@gmail.com","33333333333", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("12345"));
+        Cliente cli1 = new Cliente(null, "Bárbara Giovanna Nicole Gonçalves","alphabottom2011@gmail.com","603.089.980-57", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("12345"));
+        Cliente cli2 = new Cliente(null, "Cristiane Andreia Rosângela Nunes","barbara-goncalves82@mavex.com.br","883.236.270-88", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("54321"));
+
         cli1.getTelefones().addAll(Arrays.asList("12121212","34343434","45454545"));
+        cli2.getTelefones().addAll(Arrays.asList("9828371162","98995910788"));
+        cli2.addPerfil(Perfil.ADMIN);
 
-        Endereco end1 = new Endereco(null,"logarouro","111","apt 11 bloco 1", "bairro","cep",cli1, cid1 );
-        Endereco end2 = new Endereco(null,"logarouro2","1112","apt 112 bloco 12", "bairro2","cep2",cli1, cid2 );
 
+        Endereco end1 = new Endereco(null,"logarouro","111","apt 1111 bloco 11", "bairro","cep",cli1, cid1 );
+        Endereco end2 = new Endereco(null,"logarouro2","1112","apt 1112 bloco 112", "bairro2","cep2",cli1, cid2 );
+        Endereco end3 = new Endereco(null,"Rua dos Canários","756","apt 1112 bloco 112", "Santa Inês","65919364",cli2, cid3 );
         cli1.getEnderecos().addAll(Arrays.asList(end1,end2));
-
-        cliRepo.saveAll(Arrays.asList(cli1));
-        endRepo.saveAll(Arrays.asList(end1,end2));
+        cli2.getEnderecos().addAll(Arrays.asList(end3));
+        cliRepo.saveAll(Arrays.asList(cli1,cli2));
+        endRepo.saveAll(Arrays.asList(end1,end2,end3));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        Pedido ped1 = new Pedido(null, sdf.parse("21/03/1989 11:22"),cli1,end2);
+        Pedido ped1 = new Pedido(null, sdf.parse("11/02/1999 11:22"),cli1,end2);
         Pedido ped2 = new Pedido(null,sdf.parse("13/07/2022 11:24"), cli1,end1);
 
         Pagamento pgto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO,ped1,4);
