@@ -1,6 +1,7 @@
 package udemy.nelio.cursojavaangular.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import udemy.nelio.cursojavaangular.domain.cliente.Cidade;
 import udemy.nelio.cursojavaangular.domain.cliente.Cliente;
@@ -18,6 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 @Service
 public class DBService {
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     private CategoriaRepository catrepo;
     @Autowired
@@ -92,7 +96,7 @@ public class DBService {
         cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3));
 
 
-        Cliente cli1 = new Cliente(null, "Paulo Henrique","alphabottom2011@gmail.com","33333333333", TipoCliente.PESSOAFISICA);
+        Cliente cli1 = new Cliente(null, "Paulo Henrique","alphabottom2011@gmail.com","33333333333", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("12345"));
         cli1.getTelefones().addAll(Arrays.asList("12121212","34343434","45454545"));
 
         Endereco end1 = new Endereco(null,"logarouro","111","apt 11 bloco 1", "bairro","cep",cli1, cid1 );

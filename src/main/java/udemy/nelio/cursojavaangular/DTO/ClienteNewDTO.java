@@ -32,7 +32,18 @@ public class ClienteNewDTO implements Serializable {
     private String telefone3;
     private Integer cidadeId;
 
+    @NotEmpty(message = "Preechimento obrigatorio")
+    private String senha;
+
     public ClienteNewDTO() {
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getName() {
