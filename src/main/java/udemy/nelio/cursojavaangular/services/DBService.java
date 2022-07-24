@@ -97,8 +97,8 @@ public class DBService {
         cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3));
 
 
-        Cliente cli1 = new Cliente(null, "Bárbara Giovanna Nicole Gonçalves","alphabottom2011@gmail.com","603.089.980-57", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("12345"));
-        Cliente cli2 = new Cliente(null, "Cristiane Andreia Rosângela Nunes","barbara-goncalves82@mavex.com.br","883.236.270-88", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("54321"));
+        Cliente cli1 = new Cliente(null, "Bárbara Giovanna Nicole Gonçalves","alphabottom2011@gmail.com","603.089.980-57", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("Zq4t7w!z%C*F-JaNdRfUjXn2r5u8x/A?"));
+        Cliente cli2 = new Cliente(null, "Cristiane Andreia Rosângela Nunes","barbara-goncalves82@mavex.com.br","883.236.270-88", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("F-JaNdRgUkXp2s5v8y/B?E(H+KbPeShV"));
 
         cli1.getTelefones().addAll(Arrays.asList("12121212","34343434","45454545"));
         cli2.getTelefones().addAll(Arrays.asList("9828371162","98995910788"));
