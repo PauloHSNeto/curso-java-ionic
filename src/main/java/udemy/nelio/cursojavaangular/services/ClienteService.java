@@ -1,6 +1,8 @@
 package udemy.nelio.cursojavaangular.services;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import udemy.nelio.cursojavaangular.enums.Perfil;
+import udemy.nelio.cursojavaangular.exception.AuthorizationException;
 import udemy.nelio.cursojavaangular.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,6 +21,7 @@ import udemy.nelio.cursojavaangular.exception.DataIntegrityException;
 import udemy.nelio.cursojavaangular.repository.CidadeRepository;
 import udemy.nelio.cursojavaangular.repository.ClienteRepository;
 import udemy.nelio.cursojavaangular.repository.EnderecoRepository;
+import udemy.nelio.cursojavaangular.security.UserSS;
 
 
 import java.util.List;
@@ -37,6 +40,11 @@ public class ClienteService {
     private EnderecoRepository endRepo;
 
     public Cliente find(Integer id){
+
+        UserSS user = UserService.authenticated();
+        if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
         Optional<Cliente> obj = repo.findById(id);
 
         return obj.orElseThrow(()-> new ObjectNotFoundException(

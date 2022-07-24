@@ -1,5 +1,6 @@
 package udemy.nelio.cursojavaangular.exception;
 
+import com.amazonaws.services.licensemanager.model.AuthorizationException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,4 +39,11 @@ public class ResourceExceptionHandler implements Serializable {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
     }
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
+
 }
