@@ -1,15 +1,21 @@
 package udemy.nelio.cursojavaangular.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import udemy.nelio.cursojavaangular.domain.cliente.Cliente;
 import udemy.nelio.cursojavaangular.domain.pedido.ItemPedido;
 import udemy.nelio.cursojavaangular.domain.pedido.PagamentoComBoleto;
 import udemy.nelio.cursojavaangular.domain.pedido.Pedido;
 import udemy.nelio.cursojavaangular.enums.EstadoPagamento;
+import udemy.nelio.cursojavaangular.exception.AuthorizationException;
 import udemy.nelio.cursojavaangular.exception.ObjectNotFoundException;
 import udemy.nelio.cursojavaangular.repository.ItemPedidoRepository;
 import udemy.nelio.cursojavaangular.repository.PagamentoRepository;
 import udemy.nelio.cursojavaangular.repository.PedidoRepository;
+import udemy.nelio.cursojavaangular.security.UserSS;
 
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -63,5 +69,15 @@ public class PedidoService {
         System.out.println(obj);
         emailService.sendOrderConfirmationHtmlEmail(obj);
         return obj;
+    }
+
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado");
+        }
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Cliente cliente =  clienteService.find(user.getId());
+        return repo.findByCliente(cliente, pageRequest);
     }
 }
