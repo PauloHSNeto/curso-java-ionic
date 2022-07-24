@@ -14,12 +14,16 @@ import udemy.nelio.cursojavaangular.domain.produto.Jogo;
 import udemy.nelio.cursojavaangular.enums.EstadoPagamento;
 import udemy.nelio.cursojavaangular.enums.TipoCliente;
 import udemy.nelio.cursojavaangular.repository.*;
+import udemy.nelio.cursojavaangular.services.S3Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
 public class CursoJavaAngularApplication implements CommandLineRunner {
+    @Autowired
+    private S3Service s3Service;
+
 
     public static void main(String[] args) {
         SpringApplication.run(CursoJavaAngularApplication.class, args);
@@ -27,5 +31,7 @@ public class CursoJavaAngularApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        s3Service.uploadFile("C:\\Users\\015070631\\Downloads\\avatar.jpg");
+
     }
 }
