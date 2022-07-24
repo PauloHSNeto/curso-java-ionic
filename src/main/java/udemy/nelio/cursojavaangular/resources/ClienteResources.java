@@ -3,6 +3,7 @@ package udemy.nelio.cursojavaangular.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import udemy.nelio.cursojavaangular.DTO.ClienteDTO;
@@ -35,12 +36,14 @@ public class ClienteResources {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         serv.delete(id);
         return ResponseEntity.noContent().build();
     }
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public  ResponseEntity<List<ClienteDTO>> findAll(){
         List<Cliente> list = serv.findAll();
         List<ClienteDTO> listDTO = list.stream().map(obj-> new ClienteDTO(obj)).collect(Collectors.toList());
@@ -48,6 +51,7 @@ public class ClienteResources {
     }
 
     @GetMapping(value ="/page" )
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public  ResponseEntity<Page<ClienteDTO>> findPage(@RequestParam(value ="page", defaultValue = "0")Integer page,
                                                         @RequestParam(value ="linesPerPage", defaultValue = "24")Integer linesPerPage,
                                                         @RequestParam(value ="orderBy", defaultValue = "id") String orderBy,

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import udemy.nelio.cursojavaangular.DTO.CategoriaDTO;
@@ -28,6 +30,7 @@ public class CategoriaResources {
          return ResponseEntity.ok(result);
          }
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Void> instert(@Valid @RequestBody CategoriaDTO objDTO){
         Categoria obj = serv.fromDTO(objDTO);
         obj = serv.insert(obj);
@@ -35,6 +38,7 @@ public class CategoriaResources {
         return ResponseEntity.created(uri).build();
 
     }
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDTO,@PathVariable Integer id){
         Categoria obj = serv.fromDTO(objDTO);
@@ -43,6 +47,7 @@ public class CategoriaResources {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         serv.delete(id);
